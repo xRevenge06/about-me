@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tufan Kiraz | Portfolio</title>
-  <link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+
   <style>
     /* ====== Global Styles ====== */
     * {
@@ -93,6 +94,7 @@
       font-weight: bold;
       border-radius: 8px;
       transition: 0.3s;
+      cursor: pointer;
     }
 
     .btn:hover {
@@ -176,6 +178,62 @@
       color: #888;
     }
 
+    /* ====== Welcome Popup ====== */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .popup.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .popup-content {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+      transform: scale(0.8);
+      transition: transform 0.4s ease;
+    }
+
+    .popup.show .popup-content {
+      transform: scale(1);
+    }
+
+    .popup-content h2 {
+      color: #00d4ff;
+      margin-bottom: 15px;
+    }
+
+    .popup-content p {
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .popup-content .btn {
+      background: #00d4ff;
+    }
+
     /* ====== Responsive ====== */
     @media (max-width: 768px) {
       nav {
@@ -191,6 +249,15 @@
   </style>
 </head>
 <body>
+  <!-- Welcome Popup -->
+  <div class="popup" id="welcomePopup">
+    <div class="popup-content">
+      <h2>Welcome!</h2>
+      <p>Hello, welcome to my website.<br> For more information, click continue.</p>
+      <button class="btn" onclick="closePopup()">Continue</button>
+    </div>
+  </div>
+
   <!-- Navbar -->
   <nav>
     <h1>Tufan Kiraz</h1>
@@ -269,6 +336,23 @@
   <footer>
     <p>© 2025 Tufan Kiraz. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Show popup on page load
+    window.onload = function() {
+      const popup = document.getElementById("welcomePopup");
+      popup.classList.add("show");
+    }
+
+    // Close popup with fade-out
+    function closePopup() {
+      const popup = document.getElementById("welcomePopup");
+      popup.classList.remove("show");
+      popup.classList.add("hide");
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 500); // wait for animation
+    }
+  </script>
 </body>
-<link rel="icon" type="image/png" href="favicon.png">
 </html>
