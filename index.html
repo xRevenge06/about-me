@@ -5,190 +5,268 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tufan Kiraz | Portfolio</title>
   <style>
+    /* ====== Global Styles ====== */
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
       background: #0d0d0d;
-      color: #fff;
+      color: #f1f1f1;
       line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
     }
 
-    body.light {
-      background: #f5f5f5;
-      color: #111;
+    a {
+      color: #00d4ff;
+      text-decoration: none;
+      transition: 0.3s;
     }
 
+    a:hover {
+      color: #ff4ecd;
+    }
+
+    /* ====== Navbar ====== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      position: fixed;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+    }
+
+    nav h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00d4ff;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    /* ====== Hero Section ====== */
     header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 60px 20px;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      color: #ff4c4c;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #111111);
     }
 
     header h2 {
+      font-size: 2rem;
+      color: #00d4ff;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 20px 0;
+    }
+
+    header p {
       font-size: 1.2rem;
-      color: #00bfff;
-      font-weight: normal;
+      color: #ccc;
+      max-width: 600px;
     }
 
-    .profile-pic {
-      display: block;
-      margin: 30px auto;
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      background: url("kendifotografim.jpg") center/cover no-repeat;
-      border: 4px solid #ff4c4c;
-    }
-
-    section {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .skills, .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 15px;
-      transition: transform 0.3s, background 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      background: #222;
-    }
-
-    body.light .card {
-      background: #fff;
-      color: #111;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      margin-top: 50px;
-      background: #111;
-      color: #888;
-    }
-
-    body.light footer {
-      background: #ddd;
-      color: #444;
-    }
-
-    /* Button */
     .btn {
       display: inline-block;
-      margin: 10px;
-      padding: 10px 20px;
-      background: #00bfff;
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
+      margin-top: 25px;
+      padding: 12px 25px;
+      background: #00d4ff;
+      color: #0d0d0d;
+      font-weight: bold;
+      border-radius: 8px;
       transition: 0.3s;
     }
 
     .btn:hover {
-      background: #008fcc;
+      background: #ff4ecd;
+      color: #fff;
     }
 
-    body.light .btn {
-      background: #ff4c4c;
+    /* ====== Section Styles ====== */
+    section {
+      padding: 80px 50px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #00d4ff;
+      text-align: center;
+    }
+
+    /* ====== Skills ====== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+
+    .skill {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+    }
+
+    /* ====== Projects ====== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .project {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-8px);
+    }
+
+    .project h3 {
+      margin-bottom: 10px;
+      color: #ff4ecd;
+    }
+
+    /* ====== Contact ====== */
+    .contact {
+      text-align: center;
+    }
+
+    .contact a {
+      margin: 0 15px;
+      font-size: 1.2rem;
+    }
+
+    /* ====== Footer ====== */
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* ====== Responsive ====== */
+    @media (max-width: 768px) {
+      nav {
+        padding: 20px;
+      }
+      nav ul {
+        display: none;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <nav>
+    <h1>Tufan Kiraz</h1>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
+  <!-- Hero Section -->
   <header>
-    <h1 id="typewriter"></h1>
-    <h2>Web Developer & Gamer</h2>
-    <div class="profile-pic"></div>
-    <button class="btn" id="toggleTheme">Toggle Theme</button>
+    <h2>Hello, I'm</h2>
+    <h1>Tufan Kiraz</h1>
+    <p>A passionate Web Developer with 2 years of experience. Skilled in C#, HTML, CSS, JavaScript, SQL, PHP and Unity. I build modern websites and applications with a strong focus on design and performance.</p>
+    <a href="#projects" class="btn">View My Work</a>
   </header>
 
-  <section>
+  <!-- About Section -->
+  <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m <b>Tufan Kiraz</b>, a passionate Web Developer currently studying Web Programming at Ankara University.  
-       I love building modern, user-friendly websites and I also enjoy gaming in my free time.  
-       Coding + Gaming = My Lifestyle 😎</p>
+    <p>
+      I'm Tufan, a web developer with 2 years of experience.  
+      I've created various projects such as a 2D Unity game, a Rust item trading site, and restaurant websites.  
+      Beyond coding, I love playing games and practicing bodybuilding for the last 2 years.  
+      My goal is to build impactful digital products that combine functionality and modern design.
+    </p>
   </section>
 
-  <section>
+  <!-- Skills Section -->
+  <section id="skills">
     <h2>Skills</h2>
-    <div class="skills">
-      <div class="card">HTML5, CSS3, JavaScript</div>
-      <div class="card">React, Node.js (learning)</div>
-      <div class="card">Responsive Design</div>
-      <div class="card">Problem Solving</div>
+    <div class="skills-grid">
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">C#</div>
+      <div class="skill">PHP</div>
+      <div class="skill">SQL</div>
+      <div class="skill">Unity</div>
     </div>
   </section>
 
-  <section>
+  <!-- Projects Section -->
+  <section id="projects">
     <h2>Projects</h2>
-    <div>
-      <button class="btn filter" data-filter="all">All</button>
-      <button class="btn filter" data-filter="web">Web</button>
-      <button class="btn filter" data-filter="game">Game</button>
-    </div>
-    <div class="projects" id="projectList">
-      <div class="card" data-type="web">Portfolio Website</div>
-      <div class="card" data-type="web">Restaurant Website</div>
-      <div class="card" data-type="game">Unity 2D Game</div>
-      <div class="card" data-type="game">Rust Trading Site</div>
+    <div class="projects-grid">
+      <div class="project">
+        <h3>Unity 2D Game</h3>
+        <p>A fun 2D game built using Unity, focusing on mechanics and player experience.</p>
+      </div>
+      <div class="project">
+        <h3>Rust Item Trading Site</h3>
+        <p>An e-commerce-like website for trading Rust items with a secure backend.</p>
+      </div>
+      <div class="project">
+        <h3>Restaurant Websites</h3>
+        <p>Modern and responsive websites designed for local restaurants to showcase their menu and services.</p>
+      </div>
     </div>
   </section>
 
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <p>Feel free to reach out via email, GitHub or Discord.</p>
+      <a href="mailto:ronaldoege123@gmail.com">Email</a>
+      <a href="https://github.com/xRevenge06" target="_blank">GitHub</a>
+      <a href="#">Discord: revenge06</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    &copy; 2025 Tufan Kiraz | Designed & Coded by Myself
+    <p>© 2025 Tufan Kiraz. All rights reserved.</p>
   </footer>
-
-  <script>
-    // Typewriter Effect
-    const text = "Hi, I'm Tufan Kiraz";
-    let i = 0;
-    function typeWriter() {
-      if (i < text.length) {
-        document.getElementById("typewriter").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 100);
-      }
-    }
-    typeWriter();
-
-    // Theme Toggle
-    const toggleBtn = document.getElementById("toggleTheme");
-    toggleBtn.addEventListener("click", () => {
-      document.body.classList.toggle("light");
-    });
-
-    // Project Filter
-    const filters = document.querySelectorAll(".filter");
-    const projects = document.querySelectorAll("#projectList .card");
-
-    filters.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const type = btn.dataset.filter;
-        projects.forEach(proj => {
-          proj.style.display = (type === "all" || proj.dataset.type === type) ? "block" : "none";
-        });
-      });
-    });
-  </script>
-
 </body>
 </html>
