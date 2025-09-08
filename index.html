@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tufan Kiraz | Portfolio</title>
-<link rel="icon" type="image/png" href="favicon.png">
+  <title>Tufan Kiraz - Web Developer</title>
+  <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
     /* ====== Global Styles ====== */
@@ -66,7 +66,9 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #111111);
+      background: rgba(0,0,0,0.6); /* Video üzerine hafif karartma */
+      position: relative;
+      z-index: 1;
     }
 
     header h2 {
@@ -107,6 +109,8 @@
       padding: 80px 50px;
       max-width: 1100px;
       margin: auto;
+      position: relative;
+      z-index: 1;
     }
 
     section h2 {
@@ -176,6 +180,8 @@
       margin-top: 40px;
       font-size: 0.9rem;
       color: #888;
+      position: relative;
+      z-index: 1;
     }
 
     /* ====== Welcome Popup ====== */
@@ -246,15 +252,33 @@
         font-size: 2rem;
       }
     }
+
+    /* ====== Video Background ====== */
+    #bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+      filter: brightness(0.5);
+    }
   </style>
 </head>
 <body>
+
+  <!-- Background Video -->
+  <video autoplay muted loop id="bg-video">
+    <source src="arkaplan.mp4" type="video/mp4">
+  </video>
+
   <!-- Welcome Popup -->
   <div class="popup" id="welcomePopup">
     <div class="popup-content">
-      <h2>Welcome!</h2>
-      <p>Hello, welcome to my website.<br> For more information, click continue.</p>
-      <button class="btn" onclick="closePopup()">Continue</button>
+      <h2>Merhaba!</h2>
+      <p>Merhaba kişisel web siteme hoşgeldiniz.<br> Daha fazla bilgi için alttaki butona tıklayınız.</p>
+      <button class="btn" onclick="closePopup()">Devam et</button>
     </div>
   </div>
 
@@ -262,70 +286,64 @@
   <nav>
     <h1>Tufan Kiraz</h1>
     <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">Hakkımda</a></li>
+      <li><a href="#skills">Bildiğim diller</a></li>
+      <li><a href="#projects">Portfolyom</a></li>
+      <li><a href="#contact">İletişim</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <header>
-    <h2>Hello, I'm</h2>
+    <h2>Merhaba, ben</h2>
     <h1>Tufan Kiraz</h1>
-    <p>A passionate Web Developer with 2 years of experience. Skilled in C#, HTML, CSS, JavaScript, SQL, PHP and Unity. I build modern websites and applications with a strong focus on design and performance.</p>
-    <a href="#projects" class="btn">View My Work</a>
+    <p>2 yıllık deneyime sahip bir Web Geliştiricisiyim. Unity(C#), HTML, CSS, JavaScript dillerinde iyiyim ve kendimi geliştirmeye devam ediyorum. Tasarım ve performansa odaklanarak modern web siteleri ve uygulamalar geliştiriyorum.</p>
+    <a href="#projects" class="btn">Projelerimi görüntüle</a>
   </header>
 
   <!-- About Section -->
   <section id="about">
-    <h2>About Me</h2>
+    <h2>Hakkımda</h2>
     <p>
-      I'm Tufan, a web developer with 2 years of experience.  
-      I've created various projects such as a 2D Unity game, a Rust item trading site, and restaurant websites.  
-      Beyond coding, I love playing games and practicing bodybuilding for the last 2 years.  
-      My goal is to build impactful digital products that combine functionality and modern design.
+      2 yıllık deneyime sahip bir Web Geliştiricisiyim. Unity(C#), HTML, CSS, JavaScript dillerinde iyiyim ve kendimi geliştirmeye devam ediyorum. Tasarım ve performansa odaklanarak modern web siteleri ve uygulamalar geliştiriyorum.
     </p>
   </section>
 
   <!-- Skills Section -->
   <section id="skills">
-    <h2>Skills</h2>
+    <h2>Bildiğim ve öğrenme aşamasında olduğum diller</h2>
     <div class="skills-grid">
       <div class="skill">HTML</div>
       <div class="skill">CSS</div>
       <div class="skill">JavaScript</div>
-      <div class="skill">C#</div>
-      <div class="skill">PHP</div>
-      <div class="skill">SQL</div>
-      <div class="skill">Unity</div>
+      <div class="skill">C# + Unity</div>
     </div>
   </section>
 
   <!-- Projects Section -->
   <section id="projects">
-    <h2>Projects</h2>
+    <h2>Projelerim</h2>
     <div class="projects-grid">
       <div class="project">
         <h3>Unity 2D Game</h3>
-        <p>A fun 2D game built using Unity, focusing on mechanics and player experience.</p>
+        <p>2D bir hayatta kalma oyunu geliştiriyorum. İleri zamanda çıkış yapabilir.</p>
       </div>
       <div class="project">
-        <h3>Rust Item Trading Site</h3>
-        <p>An e-commerce-like website for trading Rust items with a secure backend.</p>
+        <h3>Rust itemleri alış/satış/takas sitesi</h3>
+        <p>Rust oyunundaki ürünlerin ticaretini yapabileceğiniz, güvenli bir arka plana sahip e-ticaret benzeri bir web sitesi.</p>
       </div>
       <div class="project">
-        <h3>Restaurant Websites</h3>
-        <p>Modern and responsive websites designed for local restaurants to showcase their menu and services.</p>
+        <h3>Portfolyo sitesi</h3>
+        <p>Kişisel portfolyo sitem. Hakkımda, bildiğim diller, projelerim ve iletişim bilgilerimi içeriyor.</p>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
   <section id="contact">
-    <h2>Contact</h2>
+    <h2>İletişim</h2>
     <div class="contact">
-      <p>Feel free to reach out via email, GitHub or Discord.</p>
+      <p>Bana email, discord ve github üzerinden ulaşabilirsiniz.</p>
       <a href="mailto:ronaldoege123@gmail.com">Email</a>
       <a href="https://github.com/xRevenge06" target="_blank">GitHub</a>
       <a href="#">Discord: revenge06</a>
@@ -334,7 +352,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 Tufan Kiraz. All rights reserved.</p>
+    <p>© 2025 Tufan Kiraz. Tüm hakları saklıdır</p>
   </footer>
 
   <script>
