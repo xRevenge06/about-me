@@ -1,26 +1,75 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #111; color: #f0f0f0; font-family: var(--font-inter), -apple-system, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+::selection { background: rgba(255,255,255,0.12); }
+
+/* Gradient text */
+.g-text { background: linear-gradient(135deg, #fff 30%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Typing cursor */
+.t-cursor { display: inline-block; width: 2px; height: .85em; background: #e0e0e0; margin-left: 3px; vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* Section label */
+.s-label { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #777; border: 1px solid #2e2e2e; border-radius: 100px; padding: 5px 14px; background: #1a1a1a; }
+
+/* Card */
+.c-card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; transition: border-color .2s; }
+.c-card:hover { border-color: #3e3e3e; }
+
+/* Tech pill */
+.t-pill { display: inline-block; font-size: 10.5px; color: #777; background: #1e1e1e; border: 1px solid #2e2e2e; border-radius: 100px; padding: 3px 10px; transition: all .15s; }
+.t-pill:hover { color: #aaa; border-color: #3a3a3a; }
+
+/* Skill bar */
+.sk-track { height: 2px; background: #2a2a2a; border-radius: 1px; overflow: hidden; }
+.sk-fill { height: 100%; background: #e0e0e0; border-radius: 1px; transform-origin: left; }
+
+/* Dot grid bg */
+.dot-bg { background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 30px 30px; }
+
+/* Marquee */
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.marquee-inner { display:flex; animation: marquee 30s linear infinite; width: max-content; }
+.marquee-inner:hover { animation-play-state: paused; }
+
+/* ── Responsive grids ── */
+/* 4 cols → 2 on mobile */
+.rg-4 { display:grid; grid-template-columns: repeat(4,1fr); gap:10px; }
+/* 3 cols → 1 on mobile */
+.rg-3 { display:grid; grid-template-columns: repeat(3,1fr); gap:14px; }
+/* 2 cols → 1 on mobile */
+.rg-2 { display:grid; grid-template-columns: repeat(2,1fr); gap:20px 32px; }
+/* 2 form cols → 1 on mobile */
+.rg-form { display:grid; grid-template-columns: repeat(2,1fr); gap:12px; }
+/* Contact: info + form */
+.rg-contact { display:grid; grid-template-columns: 1fr 1.6fr; gap:20px; align-items:start; }
+/* Footer */
+.rg-footer { display:grid; grid-template-columns: 1.5fr 1fr 1fr; gap:32px; }
+/* About info */
+.rg-info { display:grid; grid-template-columns: repeat(4,1fr); gap:12px; }
+
+/* Section padding */
+.s-pad { padding: 80px 24px; border-top: 1px solid #1e1e1e; }
+
+@media (max-width: 767px) {
+  .rg-4       { grid-template-columns: repeat(2,1fr); }
+  .rg-3       { grid-template-columns: 1fr; }
+  .rg-2       { grid-template-columns: 1fr; gap: 16px; }
+  .rg-form    { grid-template-columns: 1fr; }
+  .rg-contact { grid-template-columns: 1fr; }
+  .rg-footer  { grid-template-columns: 1fr; gap: 24px; }
+  .rg-info    { grid-template-columns: repeat(2,1fr); }
+  .s-pad      { padding: 56px 20px; }
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (max-width: 480px) {
+  .rg-4 { grid-template-columns: repeat(2,1fr); gap:8px; }
 }
