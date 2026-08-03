@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main style={{ minHeight: "100vh" }}>
       <Navbar />
       <Hero />
       <TechMarquee />
