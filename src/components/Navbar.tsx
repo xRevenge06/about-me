@@ -1,136 +1,111 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useLang } from "@/context/LanguageContext";
+import { go } from "@/lib/scroll";
 
-const NAV_LINKS = [
+const LINKS = [
+  { id: "top", tr: "Ana", en: "Home" },
   { id: "about", tr: "Hakkımda", en: "About" },
-  { id: "skills", tr: "Yetenekler", en: "Skills" },
-  { id: "projects", tr: "Projeler", en: "Projects" },
-  { id: "experience", tr: "Deneyim", en: "Experience" },
-  { id: "contact", tr: "İletişim", en: "Contact" },
+  { id: "work", tr: "İşler", en: "Work" },
+  { id: "experience", tr: "Yol", en: "Path" },
+  { id: "contact", tr: "İletişim", en: "Mail" },
 ];
 
+function Icon({ id }: { id: string }) {
+  const p = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.6 };
+  if (id === "top")
+    return (
+      <svg {...p}>
+        <path d="M4 11l8-7 8 7v9H4z" />
+      </svg>
+    );
+  if (id === "about")
+    return (
+      <svg {...p}>
+        <circle cx="12" cy="8" r="3" />
+        <path d="M5 20c1.5-4 12.5-4 14 0" />
+      </svg>
+    );
+  if (id === "work")
+    return (
+      <svg {...p}>
+        <rect x="3" y="7" width="18" height="13" rx="1" />
+        <path d="M8 7V5h8v2" />
+      </svg>
+    );
+  if (id === "experience")
+    return (
+      <svg {...p}>
+        <path d="M12 4v16M8 8h8M8 12h8M8 16h5" />
+      </svg>
+    );
+  return (
+    <svg {...p}>
+      <rect x="4" y="6" width="16" height="12" rx="1" />
+      <path d="M4 8l8 6 8-6" />
+    </svg>
+  );
+}
+
 export default function Navbar() {
-  const { lang, setLang } = useLang();
-  const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("");
+  const { lang } = useLang();
+  const [active, setActive] = useState("top");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 20);
-      const found = NAV_LINKS.map((l) => l.id).find((id) => {
+      const ids = ["about", "work", "experience", "contact"];
+      const hit = [...ids].reverse().find((id) => {
         const el = document.getElementById(id);
-        if (!el) return false;
-        const r = el.getBoundingClientRect();
-        return r.top <= 90 && r.bottom >= 90;
+        return el ? el.getBoundingClientRect().top <= 120 : false;
       });
-      setActive(found ?? "");
+      setActive(window.scrollY < 80 ? "top" : (hit ?? "top"));
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const go = (id: string) => {
+  const jump = (id: string) => {
     setOpen(false);
-    const el = document.getElementById(id);
-    if (el)
-      window.scrollTo({
-        top: el.getBoundingClientRect().top + window.scrollY - 72,
-        behavior: "smooth",
-      });
+    go(id);
   };
 
   return (
     <>
-      <motion.header
-        initial={{ y: -56, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className={`nav-header${scrolled ? " scrolled" : ""}`}
-      >
-        <div className="nav-inner">
-          <button
-            className="nav-logo"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
-            <span className="nav-logo-icon">TK</span>
-            <span className="nav-logo-text">Tufan Kiraz</span>
-          </button>
+      <div className="mobile-bar">
+        <b>Tufan Kiraz</b>
+        <button type="button" onClick={() => setOpen((v) => !v)} aria-label="Menu">
+          ☰
+        </button>
+      </div>
 
-          <nav className="nav-links">
-            {NAV_LINKS.map((l) => (
-              <button
-                key={l.id}
-                onClick={() => go(l.id)}
-                className={`nav-link${active === l.id ? " active" : ""}`}
-              >
+      {open && (
+        <div className="drawer" onClick={() => setOpen(false)}>
+          <nav onClick={(e) => e.stopPropagation()}>
+            {LINKS.map((l) => (
+              <button key={l.id} type="button" onClick={() => jump(l.id)}>
                 {lang === "tr" ? l.tr : l.en}
               </button>
             ))}
           </nav>
-
-          <div className="nav-actions">
-            <div className="nav-lang">
-              {(["tr", "en"] as const).map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`nav-lang-btn${lang === l ? " active" : ""}`}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
-
-            <button
-              className="nav-mobile-btn"
-              onClick={() => setOpen(!open)}
-              aria-label="Menu"
-            >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path
-                  d="M2 5h14M2 9h14M2 13h14"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-          </div>
         </div>
-      </motion.header>
+      )}
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="mobile-menu-overlay"
+      <nav className="rail" aria-label="Sections">
+        {LINKS.map((l) => (
+          <button
+            key={l.id}
+            type="button"
+            className={active === l.id ? "on" : ""}
+            onClick={() => jump(l.id)}
+            aria-label={lang === "tr" ? l.tr : l.en}
+            title={lang === "tr" ? l.tr : l.en}
           >
-            <div className="mobile-menu-backdrop" onClick={() => setOpen(false)} />
-            <motion.div
-              initial={{ y: -16, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -8, opacity: 0 }}
-              className="mobile-menu-panel"
-            >
-              {NAV_LINKS.map((l) => (
-                <button
-                  key={l.id}
-                  onClick={() => go(l.id)}
-                  className={`mobile-menu-item${active === l.id ? " active" : ""}`}
-                >
-                  {lang === "tr" ? l.tr : l.en}
-                </button>
-              ))}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <Icon id={l.id} />
+          </button>
+        ))}
+      </nav>
     </>
   );
 }

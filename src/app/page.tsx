@@ -1,25 +1,32 @@
+import Field from "@/components/Field";
+import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import TechMarquee from "@/components/TechMarquee";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
+import StickyWork from "@/components/StickyWork";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main style={{ minHeight: "100vh" }}>
-      <Navbar />
-      <Hero />
-      <TechMarquee />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Contact />
-      <Footer />
-    </main>
+    <>
+      <Field />
+      <div className="shell">
+        <Navbar />
+        <Sidebar />
+        <div className="main">
+          <h1 className="sr">Tufan Kiraz — Full Stack Developer</h1>
+          <Hero />
+          <About />
+          <Skills />
+          <StickyWork />
+          <Experience />
+          <Contact />
+          <Footer />
+        </div>
+      </div>
+    </>
   );
 }

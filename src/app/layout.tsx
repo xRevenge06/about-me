@@ -1,37 +1,41 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, Outfit, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const display = Instrument_Serif({
+  variable: "--font-display",
+  subsets: ["latin", "latin-ext"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const body = Outfit({
+  variable: "--font-body",
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
   variable: "--font-mono",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Tufan Kiraz — Full Stack Developer",
   description:
-    "Revark Yazılım kurucusu ve Full Stack Developer. 6 yıllık deneyim, 100+ proje. React, Next.js, ERP/CRM ve SaaS çözümleri.",
+    "Freelance full-stack geliştirici. İşletmeler için ERP, CRM ve özel web sistemleri. Ankara. 2020’den beri.",
   keywords: [
-    "Full Stack Developer",
+    "Tufan Kiraz",
     "Revark Yazılım",
-    "React Developer",
-    "Next.js",
-    ".NET Core",
-    "Node.js",
+    "Full Stack Developer",
     "ERP",
     "CRM",
-    "SaaS",
-    "Tufan Kiraz",
+    "Next.js",
     "Ankara",
-    "TypeScript",
   ],
   authors: [{ name: "Tufan Kiraz", url: "https://tufankiraz.vercel.app" }],
   creator: "Tufan Kiraz",
@@ -40,30 +44,23 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     url: "https://tufankiraz.vercel.app",
     title: "Tufan Kiraz — Full Stack Developer",
-    description:
-      "Revark Yazılım kurucusu. React, Next.js ile ERP/CRM ve SaaS çözümleri geliştiren Full Stack Developer.",
+    description: "Freelance full-stack geliştirici. ERP, CRM ve özel web sistemleri. Ankara.",
     siteName: "Tufan Kiraz",
   },
   twitter: {
     card: "summary_large_image",
     title: "Tufan Kiraz — Full Stack Developer",
-    description:
-      "Revark Yazılım kurucusu. React, Next.js ile ERP/CRM ve SaaS çözümleri geliştiren Full Stack Developer.",
+    description: "Freelance full-stack geliştirici. ERP, CRM ve özel web sistemleri. Ankara.",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr" className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}>
-      <body className="antialiased">
+    <html lang="tr" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>
