@@ -5,18 +5,65 @@ export const skillGroups = {
   tools: ["Git", "Docker", "React Query", "Vercel"],
 };
 
+export const services = [
+  {
+    id: "web",
+    no: "01",
+    titleTr: "Web Uygulamaları",
+    titleEn: "Web Applications",
+    descTr:
+      "Her gün açılan yönetim panelleri ve iç uygulamalar. Hazır tema değil; ekibin iş akışına göre yazılmış arayüzler.",
+    descEn:
+      "Admin panels and internal tools people open every day. Not a theme, but interfaces built around how your team actually works.",
+    tags: ["React", "Next.js", "TypeScript"],
+  },
+  {
+    id: "erp",
+    no: "02",
+    titleTr: "ERP & CRM Sistemleri",
+    titleEn: "ERP & CRM Systems",
+    descTr:
+      "Satış, stok, saha, hedef ve prim tek yerde. Şirketin günlük operasyonunu uçtan uca taşıyan sistemler.",
+    descEn:
+      "Sales, stock, field teams, targets and commissions in one place. Systems that carry a company's daily operation end to end.",
+    tags: ["Node.js", ".NET", "PostgreSQL"],
+  },
+  {
+    id: "commerce",
+    no: "03",
+    titleTr: "E-ticaret Altyapıları",
+    titleEn: "E-commerce Platforms",
+    descTr:
+      "Mağaza, ödeme, stok ve sipariş akışı. İşletmenin gerçek süreçlerine göre kurulmuş, ölçeklenen altyapılar.",
+    descEn:
+      "Storefronts, payments, stock and order flow. Scalable platforms built around the real process, not a template.",
+    tags: ["Next.js", "Stripe", "PostgreSQL"],
+  },
+  {
+    id: "api",
+    no: "04",
+    titleTr: "API & Entegrasyon",
+    titleEn: "APIs & Integrations",
+    descTr:
+      "REST API'ler, üçüncü parti entegrasyonlar ve otomasyon. Sistemlerin birbiriyle sorunsuz konuşması için.",
+    descEn:
+      "REST APIs, third-party integrations and automation, so your systems talk to each other without friction.",
+    tags: ["Node.js", ".NET", "REST"],
+  },
+];
+
 export const projects = [
   {
     id: 1,
-    category: "erp",
-    titleTr: "Vitisfera",
-    titleEn: "Vitisfera",
+    featured: true,
     categoryLabelTr: "ERP & CRM",
     categoryLabelEn: "ERP & CRM",
+    titleTr: "Vitisfera",
+    titleEn: "Vitisfera",
     descTr:
       "Satış, saha, hedef ve primin tek yerden yürüdüğü bir şirket yönetim sistemi. Hem ERP hem CRM olarak kullanılıyor.",
     descEn:
-      "One system for sales, field teams, targets, and commissions. Used as both ERP and CRM.",
+      "One system for sales, field teams, targets, and commissions. Used as both an ERP and a CRM.",
     techs: ["React", "TypeScript", "Node.js", "MongoDB"],
     snippet: {
       file: "vitisfera/ops.ts",
@@ -32,20 +79,20 @@ export const projects = [
   },
   {
     id: 2,
-    category: "saas",
-    titleTr: "Hukuk bürosu yazılımı",
-    titleEn: "Law firm software",
+    featured: true,
     categoryLabelTr: "SaaS",
     categoryLabelEn: "SaaS",
+    titleTr: "Hukuk Bürosu Yazılımı",
+    titleEn: "Law Firm Software",
     descTr:
       "Müvekkil, dava dosyası ve duruşma takvimini dijitalde tutan bir büro yazılımı. Klasörle uğraşı azaltmak için yazıldı.",
     descEn:
-      "Clients, case files, and hearing dates in one place. Built so the firm spends less time on paper.",
+      "Clients, case files and hearing dates in one place. Built so the firm spends less time on paper.",
     techs: ["React", "TypeScript", ".NET"],
     snippet: {
       file: "firm/HearingsController.cs",
       lines: [
-        "[HttpGet(\"dockets/{id}\")]",
+        '[HttpGet("dockets/{id}")]',
         "public async Task<IActionResult> Get(Guid id) {",
         "  var file = await _cases.WithClient(id);",
         "  var next = file.Hearings.Upcoming();",
@@ -56,71 +103,78 @@ export const projects = [
   },
   {
     id: 3,
-    category: "product",
-    titleTr: "PerfGame",
-    titleEn: "PerfGame",
+    featured: false,
     categoryLabelTr: "Masaüstü",
     categoryLabelEn: "Desktop",
-    descTr: "Sistem performansını ölçüp ayarları uygulayan bir Windows uygulaması.",
-    descEn: "A Windows app that measures performance and applies the right settings.",
+    titleTr: "PerfGame",
+    titleEn: "PerfGame",
+    descTr: "Sistem performansını ölçüp ayarları otomatik uygulayan bir Windows uygulaması.",
+    descEn: "A Windows app that measures performance and applies the right settings automatically.",
     techs: ["C#", ".NET"],
-    snippet: {
-      file: "PerfGame/Tuner.cs",
-      lines: [
-        "public void Apply(Profile p) {",
-        "  var snap = Win32.ReadPower();",
-        "  Gpu.SetLatency(p.LowLatency);",
-        "  Cpu.ParkCores(p.ParkUnused);",
-        "  Log.Info($\"applied {snap.Score} → {p.Name}\");",
-        "}",
-      ],
-    },
   },
   {
     id: 4,
-    category: "web",
-    titleTr: "E-ticaret altyapıları",
-    titleEn: "E-commerce backends",
+    featured: false,
     categoryLabelTr: "Web",
     categoryLabelEn: "Web",
+    titleTr: "E-ticaret Altyapıları",
+    titleEn: "E-commerce Backends",
     descTr: "Mağaza, ödeme, stok. Hazır tema değil; işletmeye göre yazılmış altyapı.",
-    descEn: "Store, payments, stock. Not a theme — built around the business.",
+    descEn: "Store, payments, stock. Not a theme, but built around the business.",
     techs: ["React", "Node.js", "PostgreSQL"],
-    snippet: {
-      file: "shop/checkout.ts",
-      lines: [
-        "export async function checkout(cart: Cart) {",
-        "  const stock = await inventory.reserve(cart.lines)",
-        "  const pay = await stripe.charges.create(cart.total)",
-        "  if (!pay.ok) throw new Error('odeme')",
-        "  return order.commit({ stock, pay })",
-        "}",
-      ],
-    },
   },
   {
     id: 5,
-    category: "game",
-    titleTr: "Unity Survival",
-    titleEn: "Unity Survival",
+    featured: false,
     categoryLabelTr: "Oyun",
     categoryLabelEn: "Game",
-    descTr:
-      "2D survival. Yapay zekâ, rastgele harita, çok oyunculu ağ. Telefonda da akıcı çalışması önemliydi.",
-    descEn:
-      "2D survival with AI, procedural maps, and multiplayer. Had to stay smooth on phones.",
+    titleTr: "Unity Survival",
+    titleEn: "Unity Survival",
+    descTr: "Yapay zekâ, rastgele harita ve çok oyunculu ağ içeren 2D survival oyunu.",
+    descEn: "A 2D survival game with AI, procedural maps and multiplayer.",
     techs: ["Unity", "C#"],
   },
   {
     id: 6,
-    category: "web",
-    titleTr: "Oyun sunucu panelleri",
-    titleEn: "Game server panels",
+    featured: false,
     categoryLabelTr: "Web",
     categoryLabelEn: "Web",
+    titleTr: "Oyun Sunucu Panelleri",
+    titleEn: "Game Server Panels",
     descTr: "Oyuncu istatistikleri, market ve yönetim. Sunucunun web tarafı.",
-    descEn: "Player stats, marketplace, and admin. The web side of the server.",
+    descEn: "Player stats, marketplace and admin. The web side of the server.",
     techs: ["Node.js", "React", "MySQL"],
+  },
+];
+
+export const process = [
+  {
+    no: "01",
+    titleTr: "Keşif",
+    titleEn: "Discovery",
+    descTr: "İş akışını ve gerçek problemi anlıyorum. Neyi otomatikleştireceğimizi birlikte netleştiriyoruz.",
+    descEn: "I learn the workflow and the real problem, and we agree on exactly what to automate.",
+  },
+  {
+    no: "02",
+    titleTr: "Geliştirme",
+    titleEn: "Build",
+    descTr: "Parça parça ilerliyorum. İlerlemeyi her hafta canlı olarak görüyorsunuz.",
+    descEn: "I ship in iterations, so you see working progress every week, with no black box.",
+  },
+  {
+    no: "03",
+    titleTr: "Yayına Alma",
+    titleEn: "Launch",
+    descTr: "Kurulum, veri taşıma ve ekip eğitimi. Sistem ilk günden sorunsuz çalışır.",
+    descEn: "Deploy, data migration and team onboarding so it runs smoothly from day one.",
+  },
+  {
+    no: "04",
+    titleTr: "Destek",
+    titleEn: "Support",
+    descTr: "Yayından sonra da buradayım. Sistem büyüdükçe birlikte geliştiriyoruz.",
+    descEn: "I stay on after launch, and the system keeps evolving as the business grows.",
   },
 ];
 
@@ -131,19 +185,19 @@ export const experiences = [
     start: "2020",
     endTr: "Devam",
     endEn: "Present",
-    roleTr: "Freelance Full Stack Developer",
-    roleEn: "Freelance Full Stack Developer",
+    roleTr: "Freelance Full-Stack Developer",
+    roleEn: "Freelance Full-Stack Developer",
     companyTr: "Bağımsız",
     companyEn: "Independent",
     locationTr: "Ankara / uzaktan",
     locationEn: "Ankara / remote",
     linesTr: [
-      "İşletmelere özel web uygulamaları, yönetim panelleri ve API’ler yazıyorum.",
-      "ERP, CRM, e-ticaret ve sektöre özel işler. Teslim ettiğim iş 100’ü geçti.",
+      "İşletmelere özel web uygulamaları, yönetim panelleri ve API'ler geliştiriyorum.",
+      "ERP, CRM, e-ticaret ve sektöre özel işler. Teslim ettiğim iş 100'ü geçti.",
     ],
     linesEn: [
-      "I write custom web apps, admin panels, and APIs for businesses.",
-      "ERP, CRM, commerce, and sector-specific work. 100+ jobs delivered.",
+      "I build custom web apps, admin panels and APIs for businesses.",
+      "ERP, CRM, commerce and sector-specific work. 100+ projects delivered.",
     ],
   },
   {
@@ -159,22 +213,38 @@ export const experiences = [
     locationTr: "Ankara",
     locationEn: "Ankara",
     linesTr: ["Önlisans. Web, veritabanı ve yazılım geliştirme."],
-    linesEn: ["Associate’s degree. Web, databases, software development."],
+    linesEn: ["Associate's degree. Web, databases and software development."],
   },
 ];
 
+export const focus = [
+  { labelTr: "Web Uygulamaları", labelEn: "Web Applications", value: 35 },
+  { labelTr: "ERP & CRM", labelEn: "ERP & CRM", value: 30 },
+  { labelTr: "E-ticaret", labelEn: "E-commerce", value: 20 },
+  { labelTr: "API & Entegrasyon", labelEn: "APIs & Integrations", value: 15 },
+];
+
+export const industries = {
+  tr: ["Hukuk", "İnşaat", "Sağlık", "Perakende", "E-ticaret", "Lojistik", "Eğitim", "Üretim", "Oyun", "Finans"],
+  en: ["Law", "Construction", "Healthcare", "Retail", "E-commerce", "Logistics", "Education", "Manufacturing", "Gaming", "Finance"],
+};
+
 export const stats = [
-  { to: 6, suffix: "+", key: "yil", keyTr: "yıl deneyim", keyEn: "years in the work" },
-  { to: 100, suffix: "+", key: "is", keyTr: "tamamlanan iş", keyEn: "jobs delivered" },
-  { to: 2020, suffix: "", key: "baslangic", keyTr: "bu işe başladığım yıl", keyEn: "started this work" },
+  { to: 6, suffix: "+", labelTr: "Yıl deneyim", labelEn: "Years of experience" },
+  { to: 100, suffix: "+", labelTr: "Teslim edilen proje", labelEn: "Projects delivered" },
+  { to: 10, suffix: "+", labelTr: "Farklı sektör", labelEn: "Industries served" },
+  { to: 24, suffix: "h", labelTr: "Ortalama yanıt", labelEn: "Avg. response time" },
 ];
 
 export const social = {
   email: "tufankiraz@revarkyazilim.com",
   phone: "+905386886241",
-  phoneDisplay: "0538 688 62 41",
+  phoneDisplay: "+90 538 688 62 41",
   github: "https://github.com/xRevenge06",
+  githubHandle: "xRevenge06",
   linkedin: "https://linkedin.com/in/tufan-kiraz-920580387",
+  linkedinHandle: "tufan-kiraz",
   website: "https://revarkyazilim.com",
   websiteDisplay: "revarkyazilim.com",
+  location: "Ankara, Türkiye",
 };

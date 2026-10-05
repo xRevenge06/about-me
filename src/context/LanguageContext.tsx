@@ -1,9 +1,9 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Language, translations } from "@/lib/translations";
 
-type TranslationValue = typeof translations.tr | typeof translations.en;
+type TranslationValue = typeof translations.en | typeof translations.tr;
 
 interface LanguageContextType {
   lang: Language;
@@ -13,8 +13,32 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const STORAGE_KEY = "tk-lang";
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Language>("tr");
+  // English is the default language on first visit.
+  const [lang, setLangState] = useState<Language>("en");
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (saved === "tr" || saved === "en") {
+      setLangState(saved);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  const setLang = (next: Language) => {
+    setLangState(next);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      /* ignore */
+    }
+  };
+
   const t = translations[lang];
 
   return (

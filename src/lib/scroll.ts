@@ -1,9 +1,12 @@
+const NAV_OFFSET = 96;
+
 export function go(id: string) {
-  if (id === "top") {
+  if (id === "top" || id === "home") {
     window.scrollTo({ top: 0, behavior: "smooth" });
     return;
   }
   const el = document.getElementById(id);
   if (!el) return;
-  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 8, behavior: "smooth" });
+  const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+  window.scrollTo({ top, behavior: "smooth" });
 }

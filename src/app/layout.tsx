@@ -1,56 +1,52 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Outfit, IBM_Plex_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
-const display = Instrument_Serif({
-  variable: "--font-display",
+const sans = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const body = Outfit({
-  variable: "--font-body",
-  subsets: ["latin", "latin-ext"],
-  display: "swap",
-});
-
-const mono = IBM_Plex_Mono({
-  variable: "--font-mono",
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
-  display: "swap",
-});
+const SITE_URL = "https://tufankiraz.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Tufan Kiraz — Full Stack Developer",
+  metadataBase: new URL(SITE_URL),
+  title: "Tufan Kiraz · Freelance Full-Stack Developer",
   description:
-    "Freelance full-stack geliştirici. İşletmeler için ERP, CRM ve özel web sistemleri. Ankara. 2020’den beri.",
+    "Freelance full-stack developer building ERP, CRM and custom web systems for businesses. Based in Ankara, delivering since 2020. 100+ projects shipped.",
   keywords: [
     "Tufan Kiraz",
-    "Revark Yazılım",
-    "Full Stack Developer",
+    "Full-Stack Developer",
     "ERP",
     "CRM",
+    "Web Applications",
     "Next.js",
+    "React",
     "Ankara",
+    "Freelance Developer",
   ],
-  authors: [{ name: "Tufan Kiraz", url: "https://tufankiraz.vercel.app" }],
+  authors: [{ name: "Tufan Kiraz", url: SITE_URL }],
   creator: "Tufan Kiraz",
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     type: "website",
-    locale: "tr_TR",
-    url: "https://tufankiraz.vercel.app",
-    title: "Tufan Kiraz — Full Stack Developer",
-    description: "Freelance full-stack geliştirici. ERP, CRM ve özel web sistemleri. Ankara.",
+    locale: "en_US",
+    alternateLocale: ["tr_TR"],
+    url: SITE_URL,
+    title: "Tufan Kiraz · Freelance Full-Stack Developer",
+    description:
+      "ERP, CRM and custom web systems for businesses. Based in Ankara, delivering since 2020.",
     siteName: "Tufan Kiraz",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tufan Kiraz — Full Stack Developer",
-    description: "Freelance full-stack geliştirici. ERP, CRM ve özel web sistemleri. Ankara.",
+    title: "Tufan Kiraz · Freelance Full-Stack Developer",
+    description: "ERP, CRM and custom web systems for businesses. Based in Ankara.",
   },
   robots: { index: true, follow: true },
 };
@@ -59,7 +55,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="en" className={sans.variable}>
       <body>
         <Providers>{children}</Providers>
       </body>
